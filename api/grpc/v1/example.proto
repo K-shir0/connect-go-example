@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package example.v1;
+
+option go_package = "github.com/k-shir0/connect-go-example/pkg/gen/api/grpc/v1;examplev1";
+
+import "google/protobuf/empty.proto";
+
+message Task {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message CreateTaskRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message CreateTaskResponse {
+  string id = 1;
+}
+
+message TaskGetAllRequest {}
+
+message ReadAllTaskResponse {
+  repeated Task tasks = 1;
+}
+
+service ExampleService {
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+  rpc ReadAllTask(google.protobuf.Empty) returns (ReadAllTaskResponse);
+}
